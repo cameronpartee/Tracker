@@ -1,4 +1,5 @@
 export const buckets = [
+  // 0, 1, 2
   {
     name: "Technical",
     completed: 5,

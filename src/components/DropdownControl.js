@@ -5,23 +5,21 @@ import { InputLabel } from "@mui/material";
 import { Select } from "@mui/material";
 import { MenuItem } from "@mui/material";
 
-const DropdownControl = ({ name, getIncrement }) => {
-  const [increment, setIncrement] = useState(0);
+const DropdownControl = ({ name, newTableData }) => {
+  const [selectedValue, setSelectedValue] = useState(0);
 
-  const updateIncrementer = (event) => {
-    setIncrement(event.target.value);
-    getIncrement(event.target.value);
+  const updateDataTable = (e) => {
+    setSelectedValue(e.target.value);
+    newTableData({ name: name, completed: e.target.value });
   };
 
   return (
     <FormControl style={{ margin: "20px" }}>
-      <InputLabel id="select-label">{name}</InputLabel>
+      <InputLabel>{name}</InputLabel>
       <Select
-        labelId="select-label"
-        id="select"
-        value={increment}
+        value={selectedValue}
         label={name}
-        onChange={updateIncrementer}
+        onChange={updateDataTable}
         style={{ width: "120px" }}
       >
         <MenuItem value={1}>One</MenuItem>

@@ -7,22 +7,43 @@ import TableRow from "@mui/material/TableRow";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import { buckets } from "./data/data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DropdownControl from "./components/DropdownControl";
+import { Button } from "@mui/material";
 
 function App() {
   const [tableData, setTableData] = useState(buckets);
-  const [addition, setAddition] = React.useState(0);
+  const [newData, setNewData] = useState({});
+  const [newTableData, setNewTableData] = useState([]);
+
+  const hour = new Date().getHours();
+  const timeOfDay =
+    (hour < 12 && "morning") || (hour < 17 && "afternoon") || "evening";
+
+  useEffect(() => {
+    if (newTableData.some((data) => data.name === newData.name)) {
+      setNewTableData((prevTableData) =>
+        prevTableData.filter((data) => data.name !== newData.name)
+      );
+    }
+    setNewTableData((prevTableData) => [...prevTableData, newData]);
+  }, [newData]);
+
+  useEffect(() => {
+    console.log(newTableData);
+  }, [newTableData]);
 
   return (
     <div>
       <div>
-        <h1>Good morning Cameron</h1>
+        <h1>{`Good ${timeOfDay} Cameron`}</h1>
         <div>How many interview questions have you completed today?</div>
         {/* Lets add a positive word api here lol */}
-        <DropdownControl name={tableData[0].name} getIncrement={setAddition} />
-        <DropdownControl name={tableData[1].name} getIncrement={setAddition} />
-        <DropdownControl name={tableData[2].name} getIncrement={setAddition} />
+        <DropdownControl name={tableData[0].name} newTableData={setNewData} />
+        <DropdownControl name={tableData[1].name} newTableData={setNewData} />
+        <DropdownControl name={tableData[2].name} newTableData={setNewData} />
+
+        <Button>Click me</Button>
         <TableContainer
           style={{ width: "25%" }}
           component={Paper}

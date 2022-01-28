@@ -1,5 +1,4 @@
 export const buckets = [
-  // 0, 1, 2
   {
     name: "Technical",
     completed: 5,
@@ -16,3 +15,6 @@ export const buckets = [
     total: 10,
   },
 ];
+
+// next I would like to save these numbers somewhere
+// make them persist or something

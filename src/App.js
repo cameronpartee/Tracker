@@ -1,26 +1,24 @@
 import * as React from "react";
-import { buckets } from "./data/data";
-import { useState } from "react";
-import InterviewQuestionForm from "./components/InterviewQuestionForm";
-import DataProgressionTable from "./components/DataProgressionTable";
-import IntroGreeting from "./components/IntroGreeting";
+// import { buckets } from "./data/data";
+// import { useState } from "react";
+// import InterviewQuestionForm from "./components/InterviewQuestionForm";
+// import DataProgressionTable from "./components/DataProgressionTable";
+// import IntroGreeting from "./components/IntroGreeting";
+import Chart from "./components/Chart";
 
 function App() {
-  const [tableData, setTableData] = useState(buckets);
-
-  return (
-    <div>
-      <IntroGreeting />
-      <br />
-      <InterviewQuestionForm
-        tableData={tableData}
-        setTableData={setTableData}
-      />
-      <DataProgressionTable tableData={tableData} />
-    </div>
-  );
+  //const [tableData, setTableData] = useState(buckets);
+  return <Chart />;
 }
 
 export default App;
 
-// Lets use material ui, work on the structure and design of this app -> ok thank you
+// <div>
+//   <IntroGreeting />
+//   <br />
+//   <InterviewQuestionForm
+//     tableData={tableData}
+//     setTableData={setTableData}
+//   />
+//   <DataProgressionTable tableData={tableData} />
+// </div>

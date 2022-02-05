@@ -1,24 +1,23 @@
 import * as React from "react";
-// import { buckets } from "./data/data";
-// import { useState } from "react";
-// import InterviewQuestionForm from "./components/InterviewQuestionForm";
-// import DataProgressionTable from "./components/DataProgressionTable";
-// import IntroGreeting from "./components/IntroGreeting";
+import IntroGreeting from "./components/IntroGreeting";
 import Chart from "./components/Chart";
+import style from "./style/app.module.css";
+import { useState, useEffect } from "react";
 
 function App() {
-  //const [tableData, setTableData] = useState(buckets);
-  return <Chart />;
+  const [axis, setAxis] = useState("x");
+
+  const switchAxis = () => {
+    setAxis((prevAxis) => (prevAxis === "x" ? "y" : "x"));
+  };
+
+  return (
+    <div className={style.Container}>
+      <IntroGreeting />
+      <Chart axis={axis} />
+      <button onClick={switchAxis}>Switch chart axis</button>
+    </div>
+  );
 }
 
 export default App;
-
-// <div>
-//   <IntroGreeting />
-//   <br />
-//   <InterviewQuestionForm
-//     tableData={tableData}
-//     setTableData={setTableData}
-//   />
-//   <DataProgressionTable tableData={tableData} />
-// </div>

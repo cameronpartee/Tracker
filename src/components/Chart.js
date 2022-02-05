@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { chartData } from "../data/data";
 
 ChartJS.register(
   CategoryScale,
@@ -19,51 +20,61 @@ ChartJS.register(
   Legend
 );
 
-const Chart = () => {
+const Chart = ({ axis }) => {
   const handleClick = (evt, element) => {
+    console.log(evt, evt.type);
     console.log(element[0].index);
   };
 
   const options = {
-    indexAxis: "y",
+    indexAxis: axis,
     elements: {
       bar: {
-        borderWidth: 2,
+        borderWidth: 1,
       },
     },
     responsive: true,
     plugins: {
-      legend: {
-        position: "right",
-      },
       title: {
         display: true,
         text: "Progression Tracker",
+      },
+      legend: {
+        display: false,
       },
     },
     onClick: handleClick,
   };
 
   const data = {
-    labels: [
-      "Technical",
-      "Sys Design",
-      "Frontend",
-      "Stretching",
-      "Dancing",
-      "Airbnb",
-    ],
+    labels: chartData.map((data) => data.name),
     datasets: [
       {
-        label: "frequency count",
-        data: [12, 1, 3, 2, 3, 2],
-        backgroundColor: "red",
+        data: chartData.map((data) => data.count),
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 205, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(201, 203, 207, 0.2)",
+        ],
+        borderColor: [
+          "rgb(255, 99, 132)",
+          "rgb(255, 159, 64)",
+          "rgb(255, 205, 86)",
+          "rgb(75, 192, 192)",
+          "rgb(54, 162, 235)",
+          "rgb(153, 102, 255)",
+          "rgb(201, 203, 207)",
+        ],
       },
     ],
   };
 
   return (
-    <div style={{ width: "700px", height: "500px" }}>
+    <div>
       <Bar data={data} options={options} />
     </div>
   );

@@ -1,22 +1,16 @@
 import React from "react";
+import { adjectives } from "../data/data";
 
 const IntroGreeting = () => {
   const hour = new Date().getHours();
+  const index = Math.floor(Math.random() * (adjectives.length - 1 - 0) + 0);
+  const adj = adjectives[index];
   const timeOfDay =
     (hour < 12 && "morning") || (hour < 17 && "afternoon") || "evening";
 
   return (
-    <div
-      style={{
-        width: "500px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      {/* Lets add a positive word api here lol */}
-      <h1>{`Good ${timeOfDay} Cameron`}</h1>
-      <div>How many interview questions have you completed today?</div>
+    <div>
+      <h2>{`Good ${timeOfDay} ${adj.toLocaleUpperCase()} Cameron`}</h2>
     </div>
   );
 };

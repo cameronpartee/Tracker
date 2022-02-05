@@ -1,20 +1,49 @@
-export const buckets = [
+export const chartData = [
   {
     name: "Technical",
-    completed: 5,
-    total: 20,
+    count: 12,
   },
   {
     name: "System Design",
-    completed: 0,
-    total: 5,
+    count: 1,
   },
   {
     name: "Frontend",
-    completed: 1,
-    total: 10,
+    count: 3,
+  },
+  {
+    name: "Stretching",
+    count: 2,
+  },
+  {
+    name: "Dancing",
+    count: 3,
+  },
+  {
+    name: "Airbnb",
+    count: 2,
   },
 ];
 
 // next I would like to save these numbers somewhere
 // make them persist or something
+
+export const adjectives = [
+  "bright",
+  "charming",
+  "creative",
+  "determined",
+  "diligent",
+  "dynamic",
+  "hardworking",
+  "imaginative",
+  "kind",
+  "brave",
+  "capable",
+  "courageous",
+  "fearless",
+  "knowledgeable",
+  "marvelous",
+  "persistent",
+  "proficient",
+];

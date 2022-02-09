@@ -1,3 +1,6 @@
+// next I would like to save these numbers somewhere
+// make them persist or something - add this to firebase
+
 export const chartData = [
   {
     name: "Technical",
@@ -24,9 +27,6 @@ export const chartData = [
     count: 2,
   },
 ];
-
-// next I would like to save these numbers somewhere
-// make them persist or something
 
 export const adjectives = [
   "bright",

@@ -6,3 +6,5 @@ in a graphical way
 # Features
 
 - time of day recognition
+- horizontal bar char form Char.js-2
+- firebase bd

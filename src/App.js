@@ -2,7 +2,7 @@ import * as React from "react";
 import IntroGreeting from "./components/IntroGreeting";
 import Chart from "./components/Chart";
 import style from "./style/app.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [axis, setAxis] = useState("x");

@@ -1,5 +1,6 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import { useState, useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +11,8 @@ import {
   Legend,
 } from "chart.js";
 import { chartData } from "../data/data";
+import { getTimeWindow } from "../helpers/helper";
+import { colors, borders } from "../helpers/constants";
 
 ChartJS.register(
   CategoryScale,
@@ -21,9 +24,17 @@ ChartJS.register(
 );
 
 const Chart = ({ axis }) => {
+  const chartRef = useRef();
+  const [localChartData, setLocalChartData] = useState(
+    chartData.map((data) => data.count)
+  );
+  const timeWindow = getTimeWindow();
+
   const handleClick = (evt, element) => {
-    console.log(evt, evt.type);
-    console.log(element[0].index);
+    const index = element[0].index;
+    localChartData[index]++;
+    setLocalChartData(localChartData);
+    chartRef.current.update();
   };
 
   const options = {
@@ -37,7 +48,7 @@ const Chart = ({ axis }) => {
     plugins: {
       title: {
         display: true,
-        text: "Progression Tracker",
+        text: `Progression Tracker: ${timeWindow[0]} - ${timeWindow[1]}`,
       },
       legend: {
         display: false,
@@ -50,34 +61,14 @@ const Chart = ({ axis }) => {
     labels: chartData.map((data) => data.name),
     datasets: [
       {
-        data: chartData.map((data) => data.count),
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-          "rgba(255, 205, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(201, 203, 207, 0.2)",
-        ],
-        borderColor: [
-          "rgb(255, 99, 132)",
-          "rgb(255, 159, 64)",
-          "rgb(255, 205, 86)",
-          "rgb(75, 192, 192)",
-          "rgb(54, 162, 235)",
-          "rgb(153, 102, 255)",
-          "rgb(201, 203, 207)",
-        ],
+        data: localChartData,
+        backgroundColor: colors,
+        borderColor: borders,
       },
     ],
   };
 
-  return (
-    <div>
-      <Bar data={data} options={options} />
-    </div>
-  );
+  return <Bar ref={chartRef} data={data} options={options} />;
 };
 
 export default Chart;

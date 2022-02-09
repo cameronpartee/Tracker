@@ -8,11 +8,7 @@ const IntroGreeting = () => {
   const timeOfDay =
     (hour < 12 && "morning") || (hour < 17 && "afternoon") || "evening";
 
-  return (
-    <div>
-      <h2>{`Good ${timeOfDay} ${adj.toLocaleUpperCase()} Cameron`}</h2>
-    </div>
-  );
+  return <h2>{`Good ${timeOfDay} ${adj.toLocaleUpperCase()} Cameron`}</h2>;
 };
 
 export default IntroGreeting;

@@ -1,11 +1,11 @@
-export function getTimeWindow() {
-  const today = new Date();
-  var dateFormatter = {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  };
+const dateFormatter = {
+  weekday: "long",
+  month: "long",
+  day: "numeric",
+};
 
+export function getWeeklyChartTimeWindow() {
+  const today = new Date();
   const date = today.toLocaleDateString("en-US", dateFormatter);
 
   const daysToMonday = (date) => {
@@ -25,6 +25,8 @@ export function getTimeWindow() {
         return -5;
       case "Sunday,":
         return -6;
+      default:
+        return 0;
     }
   };
 
@@ -33,5 +35,14 @@ export function getTimeWindow() {
   today.setDate(today.getDate() + 6);
   const endOfTheWeek = today.toLocaleDateString("en-US", dateFormatter);
 
-  return [beginningOfTheWeek, endOfTheWeek];
+  return `Progression Tracker: ${beginningOfTheWeek} - ${endOfTheWeek}`;
+}
+
+export function getAnnualChartTimeWindow() {
+  const today = new Date();
+  // We want to capture this on download/first login
+  const startDate = "Monday, January 31";
+  const endDate = today.toLocaleDateString("en-US", dateFormatter);
+
+  return `${startDate} - ${endDate}`;
 }

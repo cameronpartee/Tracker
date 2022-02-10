@@ -17,3 +17,6 @@ export const borders = [
   "rgb(153, 102, 255)",
   "rgb(201, 203, 207)",
 ];
+
+export const weekly = "WeeklyChartData";
+export const annual = "AnnualChartData";

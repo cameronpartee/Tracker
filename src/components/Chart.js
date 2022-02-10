@@ -1,6 +1,5 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { useState, useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,8 +9,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { chartData } from "../data/data";
-import { getTimeWindow } from "../helpers/helper";
+import database from "../firebase";
+import { useState, useRef, useEffect } from "react";
 import { colors, borders } from "../helpers/constants";
 
 ChartJS.register(
@@ -23,18 +22,50 @@ ChartJS.register(
   Legend
 );
 
-const Chart = ({ axis }) => {
+const Chart = ({ axis, chartType, chartSwitch, timeWindow }) => {
   const chartRef = useRef();
-  const [localChartData, setLocalChartData] = useState(
-    chartData.map((data) => data.count)
-  );
-  const timeWindow = getTimeWindow();
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://progressiontracker-7ea67-default-rtdb.firebaseio.com/${chartType}.json`
+      );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      const responseData = await response.json();
+      const chartData = [];
+
+      for (const key in responseData) {
+        chartData.push({
+          name: key,
+          count: responseData[key].count,
+        });
+      }
+      setChartData(chartData);
+    };
+    fetchData();
+  }, [chartType]);
 
   const handleClick = (evt, element) => {
     const index = element[0].index;
-    localChartData[index]++;
-    setLocalChartData(localChartData);
+    let tempData = [...chartData];
+    chartSwitch ? tempData[index].count++ : tempData[index].count--;
+    setChartData(tempData);
     chartRef.current.update();
+    updateFirebaseDatabase(tempData, index);
+  };
+
+  const updateFirebaseDatabase = (tempData, index) => {
+    database
+      .ref(`${chartType}/${tempData[index].name}`)
+      .set({
+        count: tempData[index].count,
+      })
+      .catch(alert);
   };
 
   const options = {
@@ -48,7 +79,7 @@ const Chart = ({ axis }) => {
     plugins: {
       title: {
         display: true,
-        text: `Progression Tracker: ${timeWindow[0]} - ${timeWindow[1]}`,
+        text: timeWindow,
       },
       legend: {
         display: false,
@@ -61,7 +92,7 @@ const Chart = ({ axis }) => {
     labels: chartData.map((data) => data.name),
     datasets: [
       {
-        data: localChartData,
+        data: chartData.map((data) => data.count),
         backgroundColor: colors,
         borderColor: borders,
       },

@@ -3,3 +3,34 @@
   flex-direction: column;
   align-items: center;
 }
+
+.WeeklyChart {
+  width: 50%;
+}
+
+.AnnualChart {
+  margin-top: 50px;
+  width: 400px;
+}
+
+.ControlsPannel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+@media (max-width: 1050px) {
+  .WeeklyChart {
+    width: 75%;
+  }
+
+  .ControlsPannel {
+    width: 75%;
+  }
+
+  .AnnualChart {
+    margin-top: 30px;
+    width: 350px;
+  }
+}

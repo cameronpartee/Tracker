@@ -6,5 +6,7 @@ in a graphical way
 # Features
 
 - time of day recognition
-- horizontal bar char form Char.js-2
-- firebase bd
+- horizontal/vertical bar char form Char.js-2
+- firebase db
+- media queries
+- Add and subtract functionality

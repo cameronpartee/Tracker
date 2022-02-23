@@ -3,10 +3,15 @@ import { adjectives } from "../data/data";
 
 const IntroGreeting = () => {
   const hour = new Date().getHours();
-  const index = Math.floor(Math.random() * (adjectives.length - 1 - 0) + 0);
-  const adj = adjectives[index];
-  const timeOfDay =
-    (hour < 12 && "morning") || (hour < 17 && "afternoon") || "evening";
+  const index = React.useMemo(
+    () => Math.floor(Math.random() * (adjectives.length - 1 - 0) + 0),
+    [hour]
+  );
+  const adj = React.useMemo(() => adjectives[index], [hour]);
+  const timeOfDay = React.useMemo(
+    () => (hour < 12 && "morning") || (hour < 17 && "afternoon") || "evening",
+    [hour]
+  );
 
   return <h2>{`Good ${timeOfDay} ${adj.toLocaleUpperCase()} Cameron`}</h2>;
 };

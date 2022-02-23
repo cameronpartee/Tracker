@@ -37,26 +37,38 @@ const Chart = ({ axis, chartType, chartSwitch, timeWindow }) => {
       }
 
       const responseData = await response.json();
+      console.log(responseData);
       const chartData = [];
 
-      for (const key in responseData) {
-        chartData.push({
-          name: key,
-          count: responseData[key].count,
-        });
+      for (const elemt in responseData) {
+        let index = 0;
+        for (const key in responseData[elemt]) {
+          if (chartData.some((data) => data.name === key)) {
+            chartData[index].count += responseData[elemt][key].count;
+          } else {
+            chartData.push({
+              name: key,
+              count: responseData[elemt][key].count,
+            });
+          }
+          index++;
+        }
       }
+
       setChartData(chartData);
     };
     fetchData();
   }, [chartType]);
 
   const handleClick = (evt, element) => {
-    const index = element[0].index;
-    let tempData = [...chartData];
-    chartSwitch ? tempData[index].count++ : tempData[index].count--;
-    setChartData(tempData);
-    chartRef.current.update();
-    updateFirebaseDatabase(tempData, index);
+    if (chartSwitch !== null) {
+      const index = element[0].index;
+      let tempData = [...chartData];
+      chartSwitch ? tempData[index].count++ : tempData[index].count--;
+      setChartData(tempData);
+      chartRef.current.update();
+      updateFirebaseDatabase(tempData, index);
+    }
   };
 
   const updateFirebaseDatabase = (tempData, index) => {
@@ -67,6 +79,27 @@ const Chart = ({ axis, chartType, chartSwitch, timeWindow }) => {
       })
       .catch(alert);
   };
+
+  // This function gets called four times right now - lets at least cut the renders down to 2..s
+  const incrementAnnualByWeekly = () => {
+    if (chartSwitch !== null) {
+      let tempCount = 0;
+      for (const key in chartData) {
+        database
+          .ref(`AnnualChartData/${chartData[key].name}`)
+          .on("value", (snapshot) => {
+            tempCount = snapshot.val().count;
+          });
+        database
+          .ref(`AnnualChartData/${chartData[key].name}`)
+          .set({
+            count: tempCount + chartData[key].count,
+          })
+          .catch(alert);
+      }
+    }
+  };
+  //incrementAnnualByWeekly();
 
   const options = {
     indexAxis: axis,

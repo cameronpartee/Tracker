@@ -18,5 +18,22 @@ export const borders = [
   "rgb(201, 203, 207)",
 ];
 
-export const weekly = "WeeklyChartData";
-export const annual = "AnnualChartData";
+export const adjectives = [
+  "bright",
+  "charming",
+  "creative",
+  "determined",
+  "diligent",
+  "dynamic",
+  "hardworking",
+  "imaginative",
+  "kind",
+  "brave",
+  "capable",
+  "courageous",
+  "fearless",
+  "knowledgeable",
+  "marvelous",
+  "persistent",
+  "proficient",
+];

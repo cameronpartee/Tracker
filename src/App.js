@@ -3,7 +3,6 @@ import IntroGreeting from "./components/IntroGreeting";
 import Chart from "./components/Chart";
 import style from "./style/app.module.css";
 import { useState, useEffect } from "react";
-import { weekly, annual } from "./helpers/constants";
 import {
   getWeeklyChartTimeWindow,
   getAnnualChartTimeWindow,
@@ -27,7 +26,6 @@ function App() {
       <div className={style.WeeklyChart}>
         <Chart
           axis={axis}
-          chartType={weekly}
           chartSwitch={chartSwitch}
           timeWindow={getWeeklyChartTimeWindow()}
         />
@@ -40,7 +38,6 @@ function App() {
       <div className={style.AnnualChart}>
         <Chart
           axis={"x"}
-          chartType={annual}
           chartSwitch={null}
           timeWindow={getAnnualChartTimeWindow()}
         />

@@ -6,6 +6,14 @@
 
 .WeeklyChart {
   width: 50%;
+  position: relative;
+}
+
+.AddButton {
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  margin-right: 5px;
 }
 
 .AnnualChart {

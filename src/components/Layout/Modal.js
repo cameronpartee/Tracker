@@ -12,7 +12,6 @@ export default class Modal extends React.Component {
         <div className={style.Content}>{this.props.children}</div>
         <div className={style.Actions}>
           <button
-            className={style.ToggleButton}
             onClick={(e) => {
               this.props.hide(false);
             }}

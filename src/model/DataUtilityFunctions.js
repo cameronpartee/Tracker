@@ -44,7 +44,8 @@ export function getIdNumber() {
   var oneJan = new Date(tempDay.getFullYear(), 0, 1);
   var numberOfDays = Math.floor((tempDay - oneJan) / (24 * 60 * 60 * 1000));
   var result = Math.ceil((tempDay.getDay() + 1 + numberOfDays) / 7);
-  // lets check this tomorrow - yesterday it  was 8 today it is 9...
+  // Monday - 9
+  // Wednesday - 10
   return `${result - 1}${tempDay.getFullYear()}`;
 }
 
@@ -52,9 +53,6 @@ export function getAnnualChartTimeWindow() {
   const tempDay = new Date(today);
   // We want to capture this on download/first login
   const startDate = "Monday, January 31";
-  // endDate is wrong as well
-  // enddate should be the last sunday interval that was added to
-  // the annual numbers
   const endDate = tempDay.toLocaleDateString("en-US", dateFormatter);
 
   return `${startDate} - ${endDate}`;

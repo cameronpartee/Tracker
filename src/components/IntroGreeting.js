@@ -1,5 +1,5 @@
 import React from "react";
-import { adjectives } from "../helpers/constants";
+import { adjectives } from "../model/AppConstants";
 
 const IntroGreeting = () => {
   const hour = new Date().getHours();

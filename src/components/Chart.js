@@ -11,8 +11,8 @@ import {
 } from "chart.js";
 import database from "../firebase";
 import { useState, useRef, useEffect } from "react";
-import { colors, borders } from "../helpers/constants";
-import { getIdNumber } from "../helpers/helper";
+import { colors, borders } from "../model/AppConstants";
+import { getIdNumber } from "../model/DataUtilityFunctions";
 
 ChartJS.register(
   CategoryScale,

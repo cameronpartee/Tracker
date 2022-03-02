@@ -2,13 +2,13 @@ import * as React from "react";
 import IntroGreeting from "./components/IntroGreeting";
 import Chart from "./components/Chart";
 import style from "./style/app.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   getWeeklyChartTimeWindow,
   getAnnualChartTimeWindow,
-} from "./helpers/helper";
+} from "./model/DataUtilityFunctions";
 import ChartSwitch from "./components/ChartSwitch";
-import Modal from "./components/Modal";
+import Modal from "./components/Layout/Modal";
 import AddIcon from "@mui/icons-material/Add";
 
 function App() {
